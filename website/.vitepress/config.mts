@@ -29,6 +29,8 @@ export default defineConfig({
         text: 'Процессор · вариант 7',
         items: [
           { text: 'Задание и архитектура', link: '/guide/overview' },
+          { text: 'Спецификация процессора', link: '/guide/architecture' },
+          { text: 'Черновики программ', link: '/guide/programs' },
           { text: 'Сравнение 16 вариантов', link: '/guide/variants' },
         ],
       },

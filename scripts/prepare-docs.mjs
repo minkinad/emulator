@@ -7,6 +7,8 @@ const repository = 'https://github.com/minkinad/emulator/blob/main/';
 
 export const pages = [
   { source: 'README.md', target: 'guide/overview.md', title: 'Задание и архитектура' },
+  { source: 'docs/architecture.md', target: 'guide/architecture.md', title: 'Спецификация процессора' },
+  { source: 'docs/programs.md', target: 'guide/programs.md', title: 'Черновики программ' },
   { source: 'docs/variants.md', target: 'guide/variants.md', title: 'Сравнение вариантов' },
   { source: 'docs/implementation.md', target: 'project/implementation.md', title: 'Этапы реализации' },
   { source: 'docs/publishing.md', target: 'project/publishing.md', title: 'Публикация сайта' },

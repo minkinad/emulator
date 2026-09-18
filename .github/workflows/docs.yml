@@ -22,7 +22,7 @@ jobs:
       - name: Check required documents
         shell: bash
         run: |
-          for file in README.md AGENTS.md CHANGELOG.md docs/variants.md .github/CONTRIBUTING.md; do
+          for file in README.md AGENTS.md CHANGELOG.md docs/variants.md docs/architecture.md docs/programs.md docs/implementation.md .github/CONTRIBUTING.md; do
             test -s "$file" || { echo "Missing or empty document: $file"; exit 1; }
           done
 
