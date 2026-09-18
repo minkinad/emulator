@@ -1,0 +1,34 @@
+name: Documentation
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  docs:
+    name: Check documentation
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - name: Check required documents
+        shell: bash
+        run: |
+          for file in README.md AGENTS.md CHANGELOG.md docs/variants.md .github/CONTRIBUTING.md; do
+            test -s "$file" || { echo "Missing or empty document: $file"; exit 1; }
+          done
+
+      - name: Check whitespace in documentation
+        shell: bash
+        run: |
+          empty_tree=$(git hash-object -t tree /dev/null)
+          git -c core.whitespace=blank-at-eol,blank-at-eof,space-before-tab diff \
+            --check "$empty_tree" HEAD -- README.md AGENTS.md CHANGELOG.md docs/ .github/

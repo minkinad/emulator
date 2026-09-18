@@ -1,0 +1,7 @@
+node_modules/
+website/.vitepress/cache/
+website/.vitepress/.temp/
+website/.vitepress/dist/
+website/guide/
+website/project/
+*.local
