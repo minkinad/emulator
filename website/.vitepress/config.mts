@@ -11,7 +11,8 @@ export default defineConfig({
   cleanUrls: false,
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/emulator/favicon.svg' }],
-    ['meta', { name: 'theme-color', content: '#0d1519' }],
+    ['meta', { name: 'theme-color', content: '#f5f5f7', media: '(prefers-color-scheme: light)' }],
+    ['meta', { name: 'theme-color', content: '#111113', media: '(prefers-color-scheme: dark)' }],
   ],
   sitemap: { hostname: 'https://minkinad.github.io/emulator/' },
   themeConfig: {
@@ -19,6 +20,7 @@ export default defineConfig({
     siteTitle: 'emulator',
     nav: [
       { text: 'Документация', link: '/guide/overview' },
+      { text: 'План', link: '/project/implementation' },
       { text: 'Варианты', link: '/guide/variants' },
       { text: 'История', link: '/project/changelog' },
     ],
@@ -33,6 +35,7 @@ export default defineConfig({
       {
         text: 'Разработка',
         items: [
+          { text: 'Этапы реализации', link: '/project/implementation' },
           { text: 'Работа в команде', link: '/project/contributing' },
           { text: 'Инструкции для агентов', link: '/project/agents' },
           { text: 'Публикация сайта', link: '/project/publishing' },

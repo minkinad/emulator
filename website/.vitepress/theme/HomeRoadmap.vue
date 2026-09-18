@@ -12,12 +12,12 @@ const steps = [
 <template>
   <section class="home-roadmap" aria-labelledby="roadmap-title">
     <div class="roadmap-heading">
-      <div><p class="eyebrow">ОТ СПЕЦИФИКАЦИИ К ИСПОЛНЕНИЮ</p><h2 id="roadmap-title">Четыре шага к своей машине</h2></div>
-      <a :href="withBase('/guide/overview.html')">Открыть план <span aria-hidden="true">↗</span></a>
+      <div><p class="eyebrow">От спецификации к исполнению</p><h2 id="roadmap-title">Четыре шага к своей машине</h2></div>
+      <a :href="withBase('/project/implementation.html')">Все этапы <span aria-hidden="true">↗</span></a>
     </div>
     <div class="roadmap-grid">
       <article v-for="step in steps" :key="step.number"><span class="step-number">{{ step.number }}</span><h3>{{ step.title }}</h3><p>{{ step.text }}</p></article>
     </div>
-    <div class="project-note"><span class="note-label">СЕЙЧАС</span><p>Вариант выбран. Проектируем систему команд и устройство процессора. Реализация эмулятора впереди.</p><a :href="withBase('/project/changelog.html')">История проекта →</a></div>
+    <div class="project-note"><span class="note-label">Этап 1 готов</span><p>Документация обновлена, стек выбран. Далее — спецификация машины для варианта 7.</p><a :href="withBase('/project/changelog.html')">История проекта →</a></div>
   </section>
 </template>
