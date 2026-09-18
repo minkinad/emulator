@@ -56,11 +56,13 @@
 .processor-topline { display: flex; align-items: center; gap: 7px; color: #7ce7bb; font-size: 10px; letter-spacing: .7px; margin-bottom: 28px; }
 .processor-topline > span:last-child { margin-left: auto; color: #a2b8ae; font-size: 9px; }
 .status-dot { width: 6px; height: 6px; background: #7ce7bb; border-radius: 50%; }
-.memory-block { padding: 14px; border: 1px solid #355251; border-radius: 8px; background: #172b2e; }
-.diagram-label { display: block; font-size: 10px; letter-spacing: 1.7px; margin-bottom: 12px; }
-.memory-cells { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+.memory-banks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.memory-bank { display: flex; flex-direction: column; }
+.memory-block { flex: 1; padding: 12px; border: 1px solid #355251; border-radius: 8px; background: #172b2e; }
+.diagram-label { display: block; font-size: 10px; letter-spacing: .8px; margin-bottom: 12px; }
+.memory-cells { display: grid; grid-template-columns: 1fr; }
 .memory-cells span { padding: 9px 2px; border: 1px solid #42605b; border-radius: 3px; text-align: center; font-size: 10px; }
-.bus { display: flex; align-items: center; justify-content: center; gap: 24px; padding: 14px 0; color: #9aafa6; font-size: 10px; }
+.bus { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 0; color: #9aafa6; font-size: 10px; }
 .bus span { color: #7ce7bb; font-size: 20px; }
 .cpu-block { padding: 17px; border: 1px solid #557865; border-radius: 8px; }
 .cpu-caption { display: flex; justify-content: space-between; color: #7ce7bb; }
@@ -70,7 +72,7 @@
 .cpu-pipeline .alu { background: #7ce7bb !important; color: #102c21; font-weight: bold; }
 .register-row { display: grid; grid-template-columns: repeat(5, 1fr) 1.5fr; gap: 5px; }
 .register-row span { padding: 5px 2px; background: #1a2e30; border-radius: 3px; text-align: center; font-size: 10px; }
-.instruction-line { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 19px 0 13px; }
+.instruction-line { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; padding: 19px 0 13px; }
 .instruction-line code { font-size: 13px; color: #e1ece6; }
 .instruction-line code span { color: #7ce7bb; }
 .instruction-line > span { color: #a2b8ae; font-size: 11px; }

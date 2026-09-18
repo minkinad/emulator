@@ -6,7 +6,7 @@ prepareDocs();
 export default defineConfig({
   lang: 'ru-RU',
   title: 'Emulator',
-  description: 'Учебный процессор: от ассемблерной команды до состояния машины. Документация варианта 10.',
+  description: 'Учебный процессор: от ассемблерной команды до состояния машины. Документация варианта 7.',
   base: '/emulator/',
   cleanUrls: false,
   head: [
@@ -24,7 +24,7 @@ export default defineConfig({
     ],
     sidebar: [
       {
-        text: 'Процессор · вариант 10',
+        text: 'Процессор · вариант 7',
         items: [
           { text: 'Задание и архитектура', link: '/guide/overview' },
           { text: 'Сравнение 16 вариантов', link: '/guide/variants' },
@@ -81,7 +81,7 @@ export default defineConfig({
     sidebarMenuLabel: 'Разделы',
     returnToTopLabel: 'Наверх',
     skipToContentLabel: 'К содержимому',
-    footer: { message: 'Учебный эмулятор процессора · Вариант 10', copyright: 'От инструкции — к пониманию архитектуры.' },
+    footer: { message: 'Учебный эмулятор процессора · Вариант 7', copyright: 'От инструкции — к пониманию архитектуры.' },
   },
   vite: {
     plugins: [{
