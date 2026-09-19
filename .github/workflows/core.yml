@@ -1,4 +1,4 @@
-name: CPU core
+name: Emulator modules
 
 on:
   push:
@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   core:
-    name: Check TypeScript CPU
+    name: Check CPU and assembler
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -31,8 +31,11 @@ jobs:
       - name: Check types
         run: npm run typecheck
 
-      - name: Test CPU
+      - name: Test modules
         run: npm test
 
       - name: Build and demonstrate machine program
         run: npm run core:demo
+
+      - name: Demonstrate assembly program
+        run: node examples/assembly/run.mjs
