@@ -5,3 +5,6 @@ website/.vitepress/dist/
 website/guide/
 website/project/
 *.local
+dist/
+.test-build/
+.vitepress/cache/

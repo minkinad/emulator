@@ -1,5 +1,5 @@
 {
-  "name": "emulator-docs",
+  "name": "emulator",
   "private": true,
   "type": "module",
   "engines": {
@@ -8,9 +8,16 @@
   "scripts": {
     "docs:dev": "vitepress dev website",
     "docs:build": "vitepress build website",
-    "docs:preview": "vitepress preview website"
+    "docs:preview": "vitepress preview website",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.test.json --noEmit",
+    "test": "tsc -p tsconfig.test.json && node --test .test-build/tests/core/*.test.js",
+    "core:demo": "npm run build && node examples/machine/add.mjs",
+    "check": "npm run typecheck && npm test && npm run build && npm run docs:build"
   },
   "devDependencies": {
+    "@types/node": "22.20.3",
+    "typescript": "5.9.3",
     "vitepress": "1.6.4",
     "vue": "^3.5.0"
   }
