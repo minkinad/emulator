@@ -18,6 +18,6 @@ const steps = [
     <div class="roadmap-grid">
       <article v-for="step in steps" :key="step.number"><span class="step-number">{{ step.number }}</span><h3>{{ step.title }}</h3><p>{{ step.text }}</p></article>
     </div>
-    <div class="project-note"><span class="note-label">Этап 2 готов</span><p>Спецификация и черновики программ готовы. Далее — ядро процессора на TypeScript.</p><a :href="withBase('/project/changelog.html')">История проекта →</a></div>
+    <div class="project-note"><span class="note-label">Этап 3 готов</span><p>Ядро выполняет машинные команды и проверено тестами. Далее — ассемблер.</p><a :href="withBase('/project/changelog.html')">История проекта →</a></div>
   </section>
 </template>

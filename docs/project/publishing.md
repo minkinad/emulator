@@ -1,6 +1,6 @@
 # Публикация документации
 
-Сайт документации: [minkinad.github.io/emulator](https://minkinad.github.io/emulator/). Публикация выполняется workflow [GitHub Pages](../.github/workflows/pages.yml).
+Сайт документации: [minkinad.github.io/emulator](https://minkinad.github.io/emulator/). Публикация выполняется workflow [GitHub Pages](../../.github/workflows/pages.yml).
 
 ## Как устроен сайт
 
@@ -9,15 +9,19 @@
 | Что редактировать | Где появится |
 | --- | --- |
 | `README.md` | Задание и архитектура |
-| `docs/variants.md` | Сравнение вариантов |
-| `docs/implementation.md` | Этапы реализации |
+| `docs/architecture/cpu.md` | Спецификация процессора |
+| `docs/architecture/core-api.md` | Использование ядра |
+| `docs/architecture/programs.md` | Черновики программ |
+| `docs/project/structure.md` | Структура проекта |
+| `docs/reference/variants.md` | Сравнение вариантов |
+| `docs/project/implementation.md` | Этапы реализации |
 | `.github/CONTRIBUTING.md` | Работа в команде |
 | `AGENTS.md` | Инструкции для агентов |
 | `CHANGELOG.md` | История изменений |
-| `docs/publishing.md` | Эта страница |
+| `docs/project/publishing.md` | Эта страница |
 | `website/index.md` | Главная страница |
 
-При запуске и сборке `scripts/prepare-docs.mjs` создаёт страницы в `website/guide/` и `website/project/`, преобразуя относительные ссылки для сайта. Эти каталоги генерируются и исключены из Git. Редактировать нужно исходные Markdown-файлы, а не копии. Во время локальной разработки изменения исходников автоматически обновляют страницы.
+При запуске и сборке `scripts/docs/prepare.mjs` создаёт страницы в `website/guide/` и `website/project/`, преобразуя относительные ссылки для сайта. Эти каталоги генерируются и исключены из Git. Редактировать нужно исходные Markdown-файлы, а не копии. Во время локальной разработки изменения исходников автоматически обновляют страницы.
 
 Ссылки на методичку ведут к исходному файлу в GitHub: конвертация содержит повреждённые ссылки на иллюстрации, поэтому её не включаем в сборку сайта. Исходники задания остаются без изменений.
 
@@ -30,7 +34,7 @@ npm ci
 npm run docs:dev
 ```
 
-Откройте адрес, напечатанный VitePress, с путём `/emulator/`. Зависимости сайта не определяют язык будущего эмулятора.
+Откройте адрес, напечатанный VitePress, с путём `/emulator/`. Эта команда запускает сайт документации; ядро демонстрируется отдельно через `npm run core:demo`.
 
 Проверка производственной сборки:
 

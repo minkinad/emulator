@@ -1,5 +1,5 @@
 import { defineConfig } from 'vitepress';
-import { prepareDocs, sources } from '../../scripts/prepare-docs.mjs';
+import { prepareDocs, sources } from '../../scripts/docs/prepare.mjs';
 
 prepareDocs();
 
@@ -30,6 +30,7 @@ export default defineConfig({
         items: [
           { text: 'Задание и архитектура', link: '/guide/overview' },
           { text: 'Спецификация процессора', link: '/guide/architecture' },
+          { text: 'Использование ядра', link: '/guide/core-api' },
           { text: 'Черновики программ', link: '/guide/programs' },
           { text: 'Сравнение 16 вариантов', link: '/guide/variants' },
         ],
@@ -37,6 +38,7 @@ export default defineConfig({
       {
         text: 'Разработка',
         items: [
+          { text: 'Структура проекта', link: '/project/structure' },
           { text: 'Этапы реализации', link: '/project/implementation' },
           { text: 'Работа в команде', link: '/project/contributing' },
           { text: 'Инструкции для агентов', link: '/project/agents' },
