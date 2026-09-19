@@ -2,22 +2,22 @@
 import { withBase } from 'vitepress';
 
 const steps = [
-  { number: '01', title: 'Описать машину', text: 'Память, регистры, форматы команд и правила арифметики.' },
-  { number: '02', title: 'Собрать ядро', text: 'Выборка, декодирование и исполнение одной инструкции.' },
-  { number: '03', title: 'Подключить ассемблер', text: 'Метки, машинные слова и понятные ошибки в программе.' },
-  { number: '04', title: 'Показать результат', text: 'Интерфейс, две программы, проверки и отчёт для защиты.' },
+  { number: '01', title: 'Написать программу', text: 'Инструкции, регистры и метки в обычном текстовом файле.' },
+  { number: '02', title: 'Собрать машинный код', text: 'Проверка операндов и кодирование каждой инструкции.' },
+  { number: '03', title: 'Выполнить по шагам', text: 'Выборка из памяти команд, декодирование и работа АЛУ.' },
+  { number: '04', title: 'Проверить состояние', text: 'Регистры, память, флаги и изменения после команды.' },
 ];
 </script>
 
 <template>
   <section class="home-roadmap" aria-labelledby="roadmap-title">
     <div class="roadmap-heading">
-      <div><p class="eyebrow">От спецификации к исполнению</p><h2 id="roadmap-title">Четыре шага к своей машине</h2></div>
-      <a :href="withBase('/project/implementation.html')">Все этапы <span aria-hidden="true">↗</span></a>
+      <div><p class="eyebrow">От исходника к результату</p><h2 id="roadmap-title">Как исполняется программа</h2></div>
+      <a :href="withBase('/guide/assembler.html')">Справочник ассемблера <span aria-hidden="true">↗</span></a>
     </div>
     <div class="roadmap-grid">
       <article v-for="step in steps" :key="step.number"><span class="step-number">{{ step.number }}</span><h3>{{ step.title }}</h3><p>{{ step.text }}</p></article>
     </div>
-    <div class="project-note"><span class="note-label">Этап 3 готов</span><p>Ядро выполняет машинные команды и проверено тестами. Далее — ассемблер.</p><a :href="withBase('/project/changelog.html')">История проекта →</a></div>
+    <div class="project-note"><span class="note-label">Ядро и ассемблер</span><p>Доступны API и консольные примеры. Браузерный интерфейс находится в разработке.</p><a :href="withBase('/project/changelog.html')">История проекта →</a></div>
   </section>
 </template>

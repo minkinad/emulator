@@ -6,7 +6,7 @@ prepareDocs();
 export default defineConfig({
   lang: 'ru-RU',
   title: 'Emulator',
-  description: 'Учебный процессор: от ассемблерной команды до состояния машины. Документация варианта 7.',
+  description: 'Учебный процессор: от ассемблерной команды до состояния машины. Спецификация, ассемблер и API.',
   base: '/emulator/',
   cleanUrls: false,
   head: [
@@ -20,18 +20,19 @@ export default defineConfig({
     siteTitle: 'emulator',
     nav: [
       { text: 'Документация', link: '/guide/overview' },
-      { text: 'План', link: '/project/implementation' },
+      { text: 'Ассемблер', link: '/guide/assembler' },
       { text: 'Варианты', link: '/guide/variants' },
       { text: 'История', link: '/project/changelog' },
     ],
     sidebar: [
       {
-        text: 'Процессор · вариант 7',
+        text: 'Документация',
         items: [
-          { text: 'Задание и архитектура', link: '/guide/overview' },
+          { text: 'Начало работы', link: '/guide/overview' },
           { text: 'Спецификация процессора', link: '/guide/architecture' },
+          { text: 'Ассемблер', link: '/guide/assembler' },
           { text: 'Использование ядра', link: '/guide/core-api' },
-          { text: 'Черновики программ', link: '/guide/programs' },
+          { text: 'Алгоритмы массивов', link: '/guide/programs' },
           { text: 'Сравнение 16 вариантов', link: '/guide/variants' },
         ],
       },
@@ -39,9 +40,8 @@ export default defineConfig({
         text: 'Разработка',
         items: [
           { text: 'Структура проекта', link: '/project/structure' },
-          { text: 'Этапы реализации', link: '/project/implementation' },
-          { text: 'Работа в команде', link: '/project/contributing' },
-          { text: 'Инструкции для агентов', link: '/project/agents' },
+          { text: 'План развития', link: '/project/implementation' },
+          { text: 'Участие в разработке', link: '/project/contributing' },
           { text: 'Публикация сайта', link: '/project/publishing' },
           { text: 'История изменений', link: '/project/changelog' },
         ],
@@ -88,7 +88,7 @@ export default defineConfig({
     sidebarMenuLabel: 'Разделы',
     returnToTopLabel: 'Наверх',
     skipToContentLabel: 'К содержимому',
-    footer: { message: 'Учебный эмулятор процессора · Вариант 7', copyright: 'От инструкции — к пониманию архитектуры.' },
+    footer: { message: 'Emulator · Документация', copyright: 'От инструкции — к пониманию архитектуры.' },
   },
   vite: {
     plugins: [{

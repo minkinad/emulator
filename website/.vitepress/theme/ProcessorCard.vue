@@ -3,7 +3,7 @@
     <div class="processor-toolbar">
       <span class="processor-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="6" width="12" height="12" rx="3"/><path d="M9 3v3m6-3v3M9 18v3m6-3v3M3 9h3m-3 6h3m12-6h3m-3 6h3"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg></span>
       <span class="processor-title">Модель процессора</span>
-      <span class="processor-badge">Вариант 7</span>
+      <span class="processor-badge">16 бит</span>
     </div>
     <div class="memory-banks">
       <div class="memory-bank">
@@ -27,6 +27,6 @@
       <div class="register-row"><span>PC</span><span>IR</span><span>R₀</span><span>R₁</span><span>R₂</span><span>Флаги</span></div>
     </div>
     <div class="instruction-line"><code><span>ADD</span> R0, R1, R2</code><span>R0 ← R1 + R2</span></div>
-    <figcaption>Схема архитектуры · Исполнение появится в эмуляторе</figcaption>
+    <figcaption>Схема архитектуры · Команды и данные раздельны</figcaption>
   </figure>
 </template>
