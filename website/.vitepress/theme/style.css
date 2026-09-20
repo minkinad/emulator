@@ -140,6 +140,12 @@ a.VPFeature:hover { border-color: var(--vp-c-brand-1) !important; box-shadow: 0 
 .vp-doc h1 { font-size: 34px; font-weight: 700; line-height: 1.2; letter-spacing: -1.1px; text-wrap: balance; }
 .vp-doc h2 { letter-spacing: -.5px; }
 .vp-doc a { text-underline-offset: 3px; }
+.vp-doc .readme-hero { padding: 8px 0 12px; text-align: center; }
+.vp-doc .readme-hero > a > img { margin: 0 auto 20px; }
+.vp-doc .readme-hero h1 { margin: 0; }
+.vp-doc .readme-hero > p { margin: 16px 0; text-wrap: balance; }
+.vp-doc .readme-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+.vp-doc .readme-badges img { display: inline-block; height: 20px; vertical-align: middle; }
 .vp-doc table { border: 1px solid var(--vp-c-divider); border-radius: 14px; background: var(--surface); font-size: 14px; line-height: 1.7; }
 .vp-doc th { background: var(--surface-inset); white-space: normal; font-weight: 600; }
 .vp-doc tr:nth-child(2n) { background: var(--surface); }
