@@ -36,7 +36,7 @@ for (const example of EXAMPLES) {
   test(`запуск и шаги дают одинаковое состояние: ${example.id}`, () => {
     const slow = fixture(example.source, example.data);
     const fast = fixture(example.source, example.data);
-    for (let n = 0; n < 100 && slow.session.getSnapshot().cpu.status === 'ready'; n++) slow.session.step();
+    for (let n = 0; n < 1000 && slow.session.getSnapshot().cpu.status === 'ready'; n++) slow.session.step();
     fast.session.run('fast'); fast.tick();
     assert.equal(fast.session.getSnapshot().cpu.status, 'halted');
     assert.deepEqual(fast.session.getSnapshot().cpu, slow.session.getSnapshot().cpu);

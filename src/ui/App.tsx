@@ -5,6 +5,7 @@ import { EXAMPLES } from './examples.js';
 import { Editor, focusLine } from './components/Editor.js';
 import { Icon } from './components/Icon.js';
 import { Memory } from './components/Memory.js';
+import { ProgramResult } from './components/ProgramResult.js';
 import { Processor } from './components/Processor.js';
 
 function initialTheme(): 'light' | 'dark' {
@@ -99,7 +100,7 @@ export function App() {
           </section>
           <div className="local-note"><Icon name="chip" /><p>Вычисления выполняются в этом браузере. Исходник и данные не отправляются на сервер и не сохраняются после перезагрузки страницы.</p></div>
         </aside>
-        <div className="state-column"><Processor session={session} /><Memory session={session} onLine={line => focusLine(sourceRef, line)} /></div>
+        <div className="state-column"><Processor session={session} /><ProgramResult session={session} example={EXAMPLES.find(example => example.id === exampleId)} /><Memory session={session} onLine={line => focusLine(sourceRef, line)} /></div>
       </div>
       <footer className="app-footer"><span>Emulator · пошаговая модель процессора</span><span>17 инструкций · 16 регистров · два блока памяти</span></footer>
     </main>

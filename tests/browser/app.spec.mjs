@@ -94,3 +94,44 @@ for (const width of [320, 390, 1440]) {
     await runFast(page); expect(errors).toEqual([]);
   });
 }
+
+test('программы массивов показывают знаковый результат и слова памяти', async ({ page }) => {
+  await page.getByLabel('Пример', { exact: true }).selectOption('array-sum');
+  await runFast(page);
+  await expect(page.getByTestId('program-result').locator('strong')).toHaveText('-5');
+  await expect(page.getByTestId('program-result')).toContainText('FFFB · FFFF');
+  await expect(page.getByTestId('step-count')).toHaveText('81');
+  await page.getByLabel('Пример', { exact: true }).selectOption('array-dot');
+  await expect(page.getByTestId('program-result')).toContainText('после HALT');
+  await runFast(page);
+  await expect(page.getByTestId('program-result').locator('strong')).toHaveText('10737418240');
+  await expect(page.getByTestId('program-result')).toContainText('0000 · 8000 · 0002');
+  await expect(page.getByTestId('step-count')).toHaveText('139');
+  await button(page, 'Данные').click();
+  await expect(page.getByTestId('data-770').locator('strong')).toHaveText('0002');
+  await button(page, 'Сброс').click();
+  await expect(page.getByTestId('program-result')).toContainText('после HALT');
+  await runFast(page);
+  await expect(page.getByTestId('program-result').locator('strong')).toHaveText('10737418240');
+  await page.setViewportSize({ width: 320, height: 900 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
+test('изменение данных свёртки, отрицательный итог и неверная длина', async ({ page }) => {
+  await page.getByLabel('Пример', { exact: true }).selectOption('array-dot');
+  const data = page.getByRole('textbox', { name: 'Начальные данные', exact: true });
+  await data.fill('0x0100: 10, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1\n0x0200: 10, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1');
+  await expect(page.getByTestId('program-result')).toHaveCount(0);
+  await button(page, 'Собрать').click(); await runFast(page);
+  await expect(page.getByTestId('program-result').locator('strong')).toHaveText('-10');
+  await data.fill('0x0100: 10\n0x0200: 9\n0x0300: 123, 456, 789');
+  await button(page, 'Собрать').click(); await runFast(page);
+  await expect(page.getByTestId('program-result')).toContainText('Неверная длина');
+  await expect(page.getByTestId('program-result').locator('strong')).toHaveCount(0);
+  await button(page, 'Данные').click();
+  await expect(page.getByTestId('data-768').locator('strong')).toHaveText('007B');
+  await expect(page.getByTestId('data-771').locator('strong')).toHaveText('0001');
+  await page.getByLabel('Исходный код').fill('HALT');
+  await button(page, 'Собрать').click(); await runFast(page);
+  await expect(page.getByTestId('program-result')).toHaveCount(0);
+});
