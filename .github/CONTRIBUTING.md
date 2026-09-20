@@ -18,6 +18,7 @@
 npm ci
 npm run check
 npm run assembler:demo
+npm run arrays:demo
 npx playwright install chromium
 npm run test:browser
 ```
@@ -30,7 +31,7 @@ npm run test:browser
 
 | Workflow | Проверки |
 | --- | --- |
-| [core.yml](workflows/core.yml) | Типы, тесты CPU и ассемблера, сборка, консольные примеры и браузерные сценарии. |
+| [core.yml](workflows/core.yml) | Типы, тесты CPU, ассемблера и массивов, сборка, консольные примеры и браузерные сценарии. |
 | [docs.yml](workflows/docs.yml) | Наличие обязательных документов и пробельные ошибки. |
 | [pages.yml](workflows/pages.yml) | Сборка сайта; публикация из `main`, только сборка в pull request. |
 
