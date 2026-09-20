@@ -40,6 +40,9 @@ jobs:
       - name: Demonstrate assembly program
         run: node examples/assembly/run.mjs
 
+      - name: Demonstrate array programs
+        run: node examples/assembly/arrays.mjs
+
       - name: Build browser application
         run: npm run app:build
 

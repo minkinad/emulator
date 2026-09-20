@@ -19,7 +19,9 @@
     "preview": "vite preview",
     "app:build": "tsc -p tsconfig.app.json && vite build",
     "site:build": "npm run docs:build && npm run app:build && node scripts/site/prepare.mjs",
-    "test:browser": "playwright test"
+    "test:browser": "playwright test",
+    "programs:prepare": "node scripts/programs/prepare.mjs",
+    "arrays:demo": "npm run build && node examples/assembly/arrays.mjs"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",
