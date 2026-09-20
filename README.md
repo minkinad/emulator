@@ -1,14 +1,21 @@
-[![Логотип Emulator](website/public/favicon.svg)](https://minkinad.github.io/emulator/app/)
-
-# Emulator
-
-**От ассемблерной команды — к состоянию процессора.**
+<div align="center">
+  <a href="https://minkinad.github.io/emulator/app/">
+    <img src="website/public/favicon.svg" width="96" height="96" alt="Логотип Emulator" />
+  </a>
+  <h1>Emulator</h1>
+  <p><strong>Браузерный эмулятор процессора: ассемблер, пошаговое исполнение и наглядное состояние регистров, памяти и флагов.</strong></p>
 
 [![Проверки эмулятора](https://github.com/minkinad/emulator/actions/workflows/core.yml/badge.svg?branch=main)](https://github.com/minkinad/emulator/actions/workflows/core.yml)
 [![Документация](https://github.com/minkinad/emulator/actions/workflows/docs.yml/badge.svg?branch=main)](https://github.com/minkinad/emulator/actions/workflows/docs.yml)
 [![GitHub Pages](https://github.com/minkinad/emulator/actions/workflows/pages.yml/badge.svg?branch=main)](https://github.com/minkinad/emulator/actions/workflows/pages.yml)
 [![Node.js 22.12+](https://img.shields.io/badge/Node.js-22.12%2B-43853d)](https://github.com/minkinad/emulator/blob/main/package.json)
 [![TypeScript + React + Vite](https://img.shields.io/badge/stack-TypeScript%20%2B%20React%20%2B%20Vite-0071e3)](https://github.com/minkinad/emulator/blob/main/package.json)
+
+[Возможности](#возможности) · [Скриншоты](#скриншоты) · [Быстрый старт](#быстрый-старт) · [Модель процессора](#модель-процессора) · [Документация](#документация)
+
+</div>
+
+---
 
 Эмулятор 16-битного процессора с гарвардской архитектурой и трёхадресными арифметическими командами. Позволяет собрать ассемблерную программу в машинные слова, выполнить её по шагам и получить состояние регистров, памяти и флагов.
 
@@ -39,6 +46,8 @@
 ![Тёмная тема: регистры, 48-битный результат и память данных](website/public/screenshots/long-arithmetic-dark.png)
 
 </details>
+
+<a id="быстрый-старт"></a>
 
 ## Быстрый старт
 

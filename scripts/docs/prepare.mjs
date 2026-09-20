@@ -47,6 +47,9 @@ export function prepareDocs() {
           : `${repository}${linkedSource.split('/').map(encodeURIComponent).join('/')}`;
         return `${prefix}${link}${hash ? `#${hash}` : ''}${suffix}`;
       },
+    ).replace(
+      /(<img\b[^>]*\bsrc=")website\/public\/([^"\n]+)(")/g,
+      '$1/$2$3',
     );
     const output = resolve(root, 'website', page.target);
     mkdirSync(dirname(output), { recursive: true });
