@@ -65,6 +65,7 @@ console.log(result.state.registers[0]); // 5
 - [Синтаксис и API ассемблера](docs/architecture/assembler.md).
 - [Спецификация процессора](docs/architecture/cpu.md) и [API ядра](docs/architecture/core-api.md).
 - [Алгоритмы обработки массивов](docs/architecture/programs.md).
+- [Отчёт о реализации](docs/report/report.md) и [протокол демонстрации](docs/report/demonstration.md).
 - [Сравнение 16 вариантов архитектуры](docs/reference/variants.md).
 - [Структура проекта](docs/project/structure.md), [участие в разработке](.github/CONTRIBUTING.md) и [план развития](docs/project/implementation.md).
 - [Публикация документации](docs/project/publishing.md) и [история изменений](CHANGELOG.md).
@@ -77,6 +78,8 @@ console.log(result.state.registers[0]); // 5
 | `npm run app:build` | Проверка типов UI и сборка приложения в `dist/app/`. |
 | `npm run preview` | Просмотр собранного приложения. |
 | `npm run test:browser` | Проверки приложения в Chromium (после `app:build` и `npx playwright install chromium`). |
+| `npm run report:check` | Сверка четырёх листингов отчёта с исходными файлами. |
+| `npm run report:pdf` | Сборка документации и PDF без титульного листа; требуется Chromium Playwright. |
 | `npm run site:build` | Сборка документации и приложения в единый артефакт Pages. |
 | `npm run assembler:demo` | Сборка и исполнение ассемблерного примера с циклом. |
 | `npm run arrays:demo` | Машинные листинги и проверенный запуск обеих программ массивов. |
@@ -102,6 +105,7 @@ examples/              Машинные и ассемблерные пример
 docs/architecture/     Спецификация, API и алгоритмы
 docs/project/          Структура, развитие и публикация
 docs/reference/        Справочные материалы
+docs/report/           Технический отчёт и протокол демонстрации
 website/               Тема и исходники сайта документации
 scripts/               Подготовка документации и запуск тестов
 task/                  Исходная методичка

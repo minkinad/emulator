@@ -39,12 +39,14 @@ emulator/
 ├── docs/
 │   ├── architecture/           # Контракт CPU, API модулей и алгоритмы
 │   ├── project/                # Этапы, структура и публикация
-│   └── reference/              # Сравнение вариантов задания
+│   ├── reference/              # Сравнение вариантов задания
+│   └── report/                 # Отчёт с листингами и сценарии демонстрации
 ├── website/                    # Только сайт документации на VitePress
 │   ├── index.md                # Главная страница
 │   ├── public/                 # Статические файлы сайта
 │   └── .vitepress/             # Конфигурация и тема
 ├── scripts/
+│   ├── report/                 # Сверка листингов и экспорт PDF
 │   ├── programs/prepare.mjs    # Модуль исходников из sum.asm и dot.asm
 │   ├── test/run.mjs            # Чистая компиляция и поиск всех тестов
 │   ├── site/prepare.mjs        # Добавление приложения в артефакт Pages
@@ -91,8 +93,9 @@ emulator/
 | `dist/app/` | `npm run app:build`, браузерное приложение | Нет |
 | `test-results/`, `playwright-report/` | Браузерные проверки | Нет |
 | `.test-build/` | `npm test`, исходники и тесты | Нет |
-| `website/guide/`, `website/project/` | `scripts/docs/prepare.mjs`, исходные Markdown | Нет |
+| `website/guide/`, `website/project/`, `website/report/` | `scripts/docs/prepare.mjs`, исходные Markdown | Нет |
 | `website/.vitepress/dist/` | `docs:build` — документация; `site:build` — полный сайт | Нет |
+| `dist/report/`, `website/.vitepress/dist/reports/` | Экспорт PDF из собранной страницы отчёта | Нет |
 | Кэши VitePress и `node_modules/` | Локальная разработка и установка | Нет |
 
 Редактировать нужно исходники. В частности, `docs/project/` — настоящие документы, а `website/project/` — их автоматически созданные копии.
