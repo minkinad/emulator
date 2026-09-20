@@ -60,6 +60,35 @@ Pull request не публикует сайт. Задача сборки име�
 
 При первоначальной настройке в **Settings → Pages → Build and deployment → Source** должен быть выбран **GitHub Actions**. Настройка соответствует [официальной документации GitHub](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages) и [руководству VitePress](https://vitepress.dev/guide/deploy).
 
+## Выпуск версии 1.0.0
+
+Описание первого выпуска находится в [заметках к версии 1.0.0](releases/v1.0.0.md). Номер версии хранится в `package.json` и `package-lock.json`, история выпуска — в `CHANGELOG.md`. Файл заметок используется также как описание GitHub Release.
+
+Перед публикацией выполните проверки и подготовьте PDF, сохраняя собранное приложение в артефакте сайта:
+
+```bash
+npm ci
+npm run check
+npx playwright install chromium
+npm run test:browser
+npm run arrays:demo
+node scripts/report/pdf.mjs
+```
+
+После отправки релизного коммита в `main` дождитесь успешных проверок GitHub Actions для этого коммита. Затем создайте аннотированный тег на нём и опубликуйте GitHub Release с отчётом:
+
+```bash
+git tag -a v1.0.0 -m "Emulator v1.0.0"
+git push origin v1.0.0
+gh release create v1.0.0 dist/report/emulator-report.pdf \
+  --verify-tag \
+  --title "Emulator v1.0.0" \
+  --notes-file docs/project/releases/v1.0.0.md \
+  --latest
+```
+
+Команды рассчитаны на текущий релизный коммит в `main` и авторизованный GitHub CLI (`gh auth login`). PDF генерируется локально и не коммитится. Публикация сайта запускается отправкой `main`; тег и GitHub Release обозначают конкретную версию исходников и отчёта.
+
 ## Оформление
 
 Сайт оформлен в стиле SwiftUI: системная типографика, синий акцент, скруглённые карточки, полупрозрачная навигация и согласованные светлая/тёмная темы. Это веб-тема на CSS и Vue; SwiftUI как библиотека в сайте не используется. Настройка уменьшения движения в системе отключает переходы оформления.

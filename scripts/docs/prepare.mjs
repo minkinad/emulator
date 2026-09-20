@@ -18,6 +18,7 @@ export const pages = [
   { source: 'docs/reference/variants.md', target: 'guide/variants.md', title: 'Сравнение вариантов' },
   { source: 'docs/project/implementation.md', target: 'project/implementation.md', title: 'План развития' },
   { source: 'docs/project/publishing.md', target: 'project/publishing.md', title: 'Публикация сайта' },
+  { source: 'docs/project/releases/v1.0.0.md', target: 'project/release-1.0.0.md', title: 'Emulator 1.0.0' },
   { source: '.github/CONTRIBUTING.md', target: 'project/contributing.md', title: 'Участие в разработке' },
   { source: 'CHANGELOG.md', target: 'project/changelog.md', title: 'История изменений' },
 ];
