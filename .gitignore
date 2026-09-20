@@ -10,3 +10,4 @@ dist/
 .vitepress/cache/
 test-results/
 playwright-report/
+website/report/

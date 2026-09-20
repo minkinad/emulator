@@ -3,6 +3,7 @@ import { h } from 'vue';
 import ProcessorCard from './ProcessorCard.vue';
 import HomeRoadmap from './HomeRoadmap.vue';
 import './style.css';
+import './report.css';
 
 export default {
   extends: DefaultTheme,

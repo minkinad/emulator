@@ -36,6 +36,8 @@ export default defineConfig({
           { text: 'Использование ядра', link: '/guide/core-api' },
           { text: 'Алгоритмы массивов', link: '/guide/programs' },
           { text: 'Сравнение 16 вариантов', link: '/guide/variants' },
+          { text: 'Отчёт о реализации', link: '/report/report' },
+          { text: 'Протокол демонстрации', link: '/report/demonstration' },
         ],
       },
       {

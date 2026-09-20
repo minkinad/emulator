@@ -6,6 +6,8 @@ const root = fileURLToPath(new URL('../../', import.meta.url));
 const repository = 'https://github.com/minkinad/emulator/blob/main/';
 
 export const pages = [
+  { source: 'docs/report/report.md', target: 'report/report.md', title: 'Отчёт о реализации', pageClass: 'report-page' },
+  { source: 'docs/report/demonstration.md', target: 'report/demonstration.md', title: 'Протокол демонстрации' },
   { source: 'docs/project/application.md', target: 'guide/application.md', title: 'Браузерный эмулятор' },
   { source: 'README.md', target: 'guide/overview.md', title: 'Начало работы' },
   { source: 'docs/architecture/cpu.md', target: 'guide/architecture.md', title: 'Спецификация процессора' },
@@ -24,7 +26,7 @@ export const sources = pages.map(({ source }) => resolve(root, source));
 
 export function prepareDocs() {
   // Только каталоги генерируемых копий; исходники документов находятся вне них.
-  for (const directory of ['guide', 'project']) {
+  for (const directory of ['guide', 'project', 'report']) {
     rmSync(resolve(root, 'website', directory), { recursive: true, force: true });
   }
   for (const page of pages) {
@@ -44,6 +46,6 @@ export function prepareDocs() {
     );
     const output = resolve(root, 'website', page.target);
     mkdirSync(dirname(output), { recursive: true });
-    writeFileSync(output, `---\ntitle: ${JSON.stringify(page.title)}\nsourcePath: ${JSON.stringify(page.source)}\n---\n\n${content}`);
+    writeFileSync(output, `---\ntitle: ${JSON.stringify(page.title)}\nsourcePath: ${JSON.stringify(page.source)}\n${page.pageClass ? `pageClass: ${page.pageClass}\n` : ''}---\n\n${content}`);
   }
 }
