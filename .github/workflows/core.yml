@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   core:
-    name: Check CPU and assembler
+    name: Check modules and browser application
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -39,3 +39,12 @@ jobs:
 
       - name: Demonstrate assembly program
         run: node examples/assembly/run.mjs
+
+      - name: Build browser application
+        run: npm run app:build
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Test browser application
+        run: npm run test:browser
