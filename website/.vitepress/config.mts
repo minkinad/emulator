@@ -19,6 +19,7 @@ export default defineConfig({
     logo: '/favicon.svg',
     siteTitle: 'emulator',
     nav: [
+      { text: 'Эмулятор ↗', link: 'https://minkinad.github.io/emulator/app/' },
       { text: 'Документация', link: '/guide/overview' },
       { text: 'Ассемблер', link: '/guide/assembler' },
       { text: 'Варианты', link: '/guide/variants' },
@@ -29,6 +30,7 @@ export default defineConfig({
         text: 'Документация',
         items: [
           { text: 'Начало работы', link: '/guide/overview' },
+          { text: 'Браузерный эмулятор', link: '/guide/application' },
           { text: 'Спецификация процессора', link: '/guide/architecture' },
           { text: 'Ассемблер', link: '/guide/assembler' },
           { text: 'Использование ядра', link: '/guide/core-api' },

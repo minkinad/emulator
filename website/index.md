@@ -8,11 +8,11 @@ hero:
   tagline: Соберите ассемблер в машинные слова, выполните программу по шагам и изучите состояние регистров, памяти и флагов.
   actions:
     - theme: brand
-      text: Начать работу
-      link: /guide/overview
+      text: Открыть эмулятор
+      link: https://minkinad.github.io/emulator/app/
     - theme: alt
-      text: Синтаксис ассемблера
-      link: /guide/assembler
+      text: Начать работу
+      link: /guide/application
 features:
   - title: Раздельная память
     details: Гарвардская архитектура. Команды и данные хранятся отдельно; арифметические инструкции явно задают получателя и два источника.

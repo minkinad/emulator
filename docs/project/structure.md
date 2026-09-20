@@ -15,10 +15,19 @@ emulator/
 │   │   ├── run.ts              # Ограниченный запуск для CLI и тестов
 │   │   ├── types.ts            # Образ, снимок, флаги и результат шага
 │   │   └── errors.ts           # Коды ошибок и исключения
-│   └── assembler/              # Парсер, операнды, метки, сборка и диагностика
+│   ├── assembler/              # Парсер, операнды, метки, сборка и диагностика
+│   └── ui/                     # Браузерное приложение
+│       ├── model/              # Сеанс исполнения и ввод начальных данных, без DOM
+│       ├── components/         # Редактор, состояние CPU и память
+│       ├── App.tsx             # Рабочая область и управление
+│       ├── main.tsx            # Точка входа React
+│       ├── examples.ts         # Короткие демонстрационные программы
+│       └── styles.css          # Темы и адаптивное оформление
 ├── tests/
 │   ├── core/                   # Кодек, АЛУ, CPU и короткие машинные программы
-│   └── assembler/              # Синтаксис, метки, ошибки и машинные слова
+│   ├── assembler/              # Синтаксис, метки, ошибки и машинные слова
+│   ├── ui/                     # Данные, сеанс и отмена исполнения
+│   └── browser/                # Сценарии Playwright в Chromium
 ├── examples/
 │   ├── assembly/               # Исходники .asm и запуск через CPU
 │   └── machine/add.mjs         # Запускаемый пример с ручными машинными словами
@@ -32,6 +41,7 @@ emulator/
 │   └── .vitepress/             # Конфигурация и тема
 ├── scripts/
 │   ├── test/run.mjs            # Чистая компиляция и поиск всех тестов
+│   ├── site/prepare.mjs        # Добавление приложения в артефакт Pages
 │   └── docs/prepare.mjs        # Сборка страниц из исходных Markdown
 ├── task/                       # Исходная методичка и изображения
 ├── .github/                    # CI, публикация, шаблоны и правила участия
@@ -40,6 +50,10 @@ emulator/
 ├── CHANGELOG.md                # Выполненные изменения
 ├── package.json                # Единые команды и зависимости
 ├── package-lock.json           # Точные версии зависимостей
+├── index.html                 # HTML приложения
+├── vite.config.mts            # База /emulator/app/, сборка dist/app/
+├── playwright.config.mjs      # Браузерные проверки
+├── tsconfig.app.json          # Типы DOM и JSX, без вывода файлов
 ├── tsconfig.json               # Сборка ядра в dist/
 └── tsconfig.test.json          # Сборка тестов отдельно от библиотеки
 ```
@@ -56,19 +70,22 @@ emulator/
 | Учебный машинный пример | `examples/machine/`; ожидаемый результат проверяется на CPU. |
 | Требования к процессору | `docs/architecture/`. |
 | Правила работы и эксплуатация проекта | `docs/project/`, корневой AGENTS и `.github/CONTRIBUTING.md`. |
+| Интерфейс и управление исполнением | `src/ui/components/`, `src/ui/model/`, `tests/ui/`, `tests/browser/`. |
 | Оформление сайта | `website/.vitepress/theme/`. |
 | Новая страница сайта | Исходный Markdown в `docs/`, запись в `scripts/docs/prepare.mjs`, ссылка в конфигурации VitePress. |
 
-В дальнейшем браузерный интерфейс разместится в `src/ui/`. Ядро не импортирует ассемблер, React, DOM, Node.js или файлы сайта. Ассемблер использует публичный кодек ядра; оболочки используют API обоих модулей.
+Браузерный интерфейс находится в `src/ui/`; чистая модель сеанса не зависит от React и получает планировщик снаружи. Ядро не импортирует ассемблер, React, DOM, Node.js или файлы сайта. Ассемблер использует публичный кодек ядра; оболочки используют API обоих модулей.
 
 ## Что генерируется
 
 | Каталог | Источник | В Git |
 | --- | --- | --- |
-| `dist/` | `npm run build`, исходники `src/` | Нет |
+| `dist/core/`, `dist/assembler/`, `dist/ui/` | `npm run build`, TypeScript без DOM и JSX | Нет |
+| `dist/app/` | `npm run app:build`, браузерное приложение | Нет |
+| `test-results/`, `playwright-report/` | Браузерные проверки | Нет |
 | `.test-build/` | `npm test`, исходники и тесты | Нет |
 | `website/guide/`, `website/project/` | `scripts/docs/prepare.mjs`, исходные Markdown | Нет |
-| `website/.vitepress/dist/` | `npm run docs:build` | Нет |
+| `website/.vitepress/dist/` | `docs:build` — документация; `site:build` — полный сайт | Нет |
 | Кэши VitePress и `node_modules/` | Локальная разработка и установка | Нет |
 
 Редактировать нужно исходники. В частности, `docs/project/` — настоящие документы, а `website/project/` — их автоматически созданные копии.

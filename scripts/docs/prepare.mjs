@@ -6,6 +6,7 @@ const root = fileURLToPath(new URL('../../', import.meta.url));
 const repository = 'https://github.com/minkinad/emulator/blob/main/';
 
 export const pages = [
+  { source: 'docs/project/application.md', target: 'guide/application.md', title: 'Браузерный эмулятор' },
   { source: 'README.md', target: 'guide/overview.md', title: 'Начало работы' },
   { source: 'docs/architecture/cpu.md', target: 'guide/architecture.md', title: 'Спецификация процессора' },
   { source: 'docs/architecture/assembler.md', target: 'guide/assembler.md', title: 'Ассемблер' },
