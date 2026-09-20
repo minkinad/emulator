@@ -1,40 +1,38 @@
-<div align="center">
+<div align="center" class="readme-hero">
   <a href="https://minkinad.github.io/emulator/app/">
     <img src="website/public/favicon.svg" width="96" height="96" alt="Логотип Emulator" />
   </a>
   <h1>Emulator</h1>
-  <p><strong>Браузерный эмулятор процессора: ассемблер, пошаговое исполнение и наглядное состояние регистров, памяти и флагов.</strong></p>
-
-[![Проверки эмулятора](https://github.com/minkinad/emulator/actions/workflows/core.yml/badge.svg?branch=main)](https://github.com/minkinad/emulator/actions/workflows/core.yml)
-[![Документация](https://github.com/minkinad/emulator/actions/workflows/docs.yml/badge.svg?branch=main)](https://github.com/minkinad/emulator/actions/workflows/docs.yml)
-[![GitHub Pages](https://github.com/minkinad/emulator/actions/workflows/pages.yml/badge.svg?branch=main)](https://github.com/minkinad/emulator/actions/workflows/pages.yml)
-[![Node.js 22.12+](https://img.shields.io/badge/Node.js-22.12%2B-43853d)](https://github.com/minkinad/emulator/blob/main/package.json)
-[![TypeScript + React + Vite](https://img.shields.io/badge/stack-TypeScript%20%2B%20React%20%2B%20Vite-0071e3)](https://github.com/minkinad/emulator/blob/main/package.json)
-
-[Возможности](#возможности) · [Скриншоты](#скриншоты) · [Быстрый старт](#быстрый-старт) · [Модель процессора](#модель-процессора) · [Документация](#документация)
-
+  <p>Напишите программу. Выполните команду. Посмотрите, как работает процессор.</p>
+  <p>
+    <a href="https://minkinad.github.io/emulator/app/"><strong>Открыть эмулятор ↗</strong></a>
+    &nbsp;·&nbsp; <a href="https://minkinad.github.io/emulator/">Документация</a>
+    &nbsp;·&nbsp; <a href="#быстрый-старт">Быстрый старт</a>
+  </p>
+  <p class="readme-badges">
+    <a href="https://github.com/minkinad/emulator/actions/workflows/core.yml"><img src="https://github.com/minkinad/emulator/actions/workflows/core.yml/badge.svg?branch=main" height="20" alt="Проверки эмулятора" /></a>
+    <a href="https://github.com/minkinad/emulator/actions/workflows/docs.yml"><img src="https://github.com/minkinad/emulator/actions/workflows/docs.yml/badge.svg?branch=main" height="20" alt="Проверки документации" /></a>
+    <a href="https://github.com/minkinad/emulator/actions/workflows/pages.yml"><img src="https://github.com/minkinad/emulator/actions/workflows/pages.yml/badge.svg?branch=main" height="20" alt="GitHub Pages" /></a>
+  </p>
 </div>
 
----
+## О проекте
 
-Эмулятор 16-битного процессора с гарвардской архитектурой и трёхадресными арифметическими командами. Позволяет собрать ассемблерную программу в машинные слова, выполнить её по шагам и получить состояние регистров, памяти и флагов.
+Emulator — 16-битный процессор, который работает в браузере. Ассемблер превращает исходник в машинный код, а пошаговое исполнение показывает, как каждая команда меняет регистры, память и флаги.
 
-[Открыть эмулятор](https://minkinad.github.io/emulator/app/) · [Документация](https://minkinad.github.io/emulator/) · [PDF отчёта](https://minkinad.github.io/emulator/reports/emulator-report.pdf) · [Сценарии демонстрации](docs/report/demonstration.md)
+В основе — гарвардская архитектура с раздельной памятью команд и данных. Интерфейс написан на React, ядро и ассемблер — независимые модули TypeScript. Программы исполняются локально: исходник и данные не отправляются на сервер.
 
 ## Возможности
 
-- Редактор ассемблера с метками, диагностикой и переходом к ошибочной строке.
-- Сборка в машинные слова, пошаговое выполнение, запуск, пауза, лимит команд и сброс.
-- Все 16 регистров, флаги, PC и IR; текущая инструкция как машинное слово, ассемблер и поля.
-- Раздельная память команд и данных, начальные значения, подсветка изменений и связь с исходником.
-- Готовые примеры: цикл, работа с памятью, перенос между словами, сумма массива и 48-битная свёртка.
-- Светлая и тёмная темы, управление с клавиатуры и адаптивная вёрстка в стиле SwiftUI.
-
-Ядро и ассемблер доступны также как независимые TypeScript-модули и через консольные примеры. Вычисления выполняются в браузере; пользовательский исходник и данные не отправляются на сервер.
+- **Редактор и сборка.** Метки, диагностика ошибок и переход к строке исходника.
+- **Управление исполнением.** Один шаг, запуск, пауза, лимит команд и сброс.
+- **Состояние процессора.** 16 регистров, PC, IR, флаги и обе памяти с подсветкой изменений; декодирование текущей команды.
+- **Готовые программы.** Циклы, перенос между словами, сумма массива и 48-битная свёртка.
+- **Удобный интерфейс.** Светлая и тёмная темы, горячие клавиши и адаптация к мобильному экрану.
 
 ## Скриншоты
 
-Рабочая область после пятой команды: редактор слева, декодированная инструкция, флаги, регистры и память справа.
+Редактор и состояние процессора на одном экране. На снимке — выполнение программы по шагам в светлой теме.
 
 ![Эмулятор в светлой теме: исходник, текущая инструкция и состояние CPU](website/public/screenshots/workspace-light.png)
 
@@ -142,7 +140,7 @@ npm run test:browser
 - [Синтаксис и API ассемблера](docs/architecture/assembler.md).
 - [Спецификация процессора](docs/architecture/cpu.md) и [API ядра](docs/architecture/core-api.md).
 - [Алгоритмы обработки массивов](docs/architecture/programs.md).
-- [Отчёт о реализации](docs/report/report.md) и [протокол демонстрации](docs/report/demonstration.md).
+- [Отчёт о реализации](docs/report/report.md), [PDF отчёта](https://minkinad.github.io/emulator/reports/emulator-report.pdf) и [протокол демонстрации](docs/report/demonstration.md).
 - [Сравнение 16 вариантов архитектуры](docs/reference/variants.md).
 - [Структура проекта](docs/project/structure.md), [участие в разработке](.github/CONTRIBUTING.md) и [план развития](docs/project/implementation.md).
 - [Публикация документации](docs/project/publishing.md) и [история изменений](CHANGELOG.md).
