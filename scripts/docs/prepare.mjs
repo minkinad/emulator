@@ -38,7 +38,11 @@ export function prepareDocs() {
         const [pathname, hash] = href.split('#', 2);
         const linkedSource = relative(root, resolve(dirname(source), pathname)).split(sep).join('/');
         const linkedPage = pages.find(({ source }) => source === linkedSource);
-        const link = linkedPage
+        // Общие изображения README: в GitHub — файлы репозитория, на сайте — public assets.
+        const publicPrefix = 'website/public/';
+        const link = linkedSource.startsWith(publicPrefix)
+          ? `/${linkedSource.slice(publicPrefix.length)}`
+          : linkedPage
           ? `/${linkedPage.target}`
           : `${repository}${linkedSource.split('/').map(encodeURIComponent).join('/')}`;
         return `${prefix}${link}${hash ? `#${hash}` : ''}${suffix}`;
