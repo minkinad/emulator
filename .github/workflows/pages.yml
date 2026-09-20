@@ -32,6 +32,12 @@ jobs:
       - name: Build Pages artifact
         run: npm run site:build
 
+      - name: Install Chromium for report
+        run: npx playwright install --with-deps chromium
+
+      - name: Export report PDF
+        run: node scripts/report/pdf.mjs
+
       - name: Configure Pages
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
