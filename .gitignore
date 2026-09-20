@@ -8,3 +8,5 @@ website/project/
 dist/
 .test-build/
 .vitepress/cache/
+test-results/
+playwright-report/
