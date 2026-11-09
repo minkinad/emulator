@@ -7,6 +7,14 @@ import { MACHINE } from './isa.js';
 import type { DecodedInstruction } from './isa.js';
 import type { CpuSnapshot, CpuStatus, Flags, ProgramImage, StepResult, WriteEvent } from './types.js';
 
+type PendingWrite = { kind: 'register' | 'data'; address: number; value: number };
+interface ExecutionPlan {
+  readonly nextPc: number;
+  readonly nextFlags: Flags;
+  readonly nextStatus: CpuStatus;
+  readonly pendingWrite: PendingWrite | null;
+}
+
 export class Cpu {
   #registers = new Uint16Array(MACHINE.registerCount);
   #code = new Uint32Array(MACHINE.codeSize);
@@ -106,7 +114,7 @@ export class Cpu {
       let nextPc = this.#pc + 1;
       let nextFlags = this.#flags;
       let nextStatus: CpuStatus = 'ready';
-      let pendingWrite: { kind: 'register' | 'data'; address: number; value: number } | null = null;
+      let pendingWrite: PendingWrite | null = null;
       const read = (register: number) => this.#registers[register]!;
       switch (i.op) {
         case 'HALT': nextStatus = 'halted'; break;
@@ -131,30 +139,38 @@ export class Cpu {
           if (i.op !== 'CMP') pendingWrite = { kind: 'register', address: i.d, value: result.value };
         }
       }
-      // Все потенциальные ошибки проверены; применять эффекты можно целиком.
-      if (pendingWrite !== null) {
-        const { kind, address, value } = pendingWrite;
-        const target = kind === 'register' ? this.#registers : this.#data;
-        const before = target[address]!;
-        target[address] = value;
-        if (before !== value) writes.push({ kind, address, before, after: value });
-      }
-      this.#flags = nextFlags;
-      this.#pc = nextPc;
-      this.#status = nextStatus;
-      this.#steps += 1;
-      return { executed: true, state: this.snapshot(), writes };
+      return this.#commit({ nextPc, nextFlags, nextStatus, pendingWrite }, writes);
     } catch (error) {
-      if (!(error instanceof MachineError)) throw error;
-      this.#status = 'faulted';
-      this.#fault = {
-        code: error.code,
-        message: error.message,
-        address: this.#pc,
-        ...(fetched ? { word: this.#ir } : {}),
-      };
-      return { executed: false, state: this.snapshot(), writes };
+      return this.#fail(error, fetched, writes);
     }
+  }
+
+  #commit(plan: ExecutionPlan, writes: WriteEvent[]): StepResult {
+    // Все потенциальные ошибки проверены; применять эффекты можно целиком.
+    if (plan.pendingWrite !== null) {
+      const { kind, address, value } = plan.pendingWrite;
+      const target = kind === 'register' ? this.#registers : this.#data;
+      const before = target[address]!;
+      target[address] = value;
+      if (before !== value) writes.push({ kind, address, before, after: value });
+    }
+    this.#flags = plan.nextFlags;
+    this.#pc = plan.nextPc;
+    this.#status = plan.nextStatus;
+    this.#steps += 1;
+    return { executed: true, state: this.snapshot(), writes };
+  }
+
+  #fail(error: unknown, fetched: boolean, writes: WriteEvent[]): StepResult {
+    if (!(error instanceof MachineError)) throw error;
+    this.#status = 'faulted';
+    this.#fault = {
+      code: error.code,
+      message: error.message,
+      address: this.#pc,
+      ...(fetched ? { word: this.#ir } : {}),
+    };
+    return { executed: false, state: this.snapshot(), writes };
   }
 
   #checkDataAddress(address: number): void {

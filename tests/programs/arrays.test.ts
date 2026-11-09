@@ -152,11 +152,20 @@ test('ASM, модуль для браузера, документация и м�
   }
 });
 
-test('отображение готового результата учитывает знак и порядок слов', () => {
-  assert.equal(signedResult([0xfffb, 0xffff]), -5n);
-  assert.equal(signedResult([0, 0x8000, 2]), 10737418240n);
-  assert.equal(signedResult([0, 0x8005, 0xfffd]), -10737090560n);
-  assert.equal(signedResult([0xffff, 0xffff, 0x7fff]), (1n << 47n) - 1n);
-  assert.equal(signedResult([0, 0, 0x8000]), -(1n << 47n));
-  for (const words of [[0], [0, -1], [0, 65536], [0, NaN], [0, 1.5]]) assert.throws(() => signedResult(words));
+test('результат из двух и трёх слов собирается со знаком от старшего слова', () => {
+  const cases: [number[], bigint][] = [
+    [[0xfffb, 0xffff], -5n],
+    [[0, 0x8000, 2], 10737418240n],
+    [[0, 0x8005, 0xfffd], -10737090560n],
+    [[0xffff, 0xffff, 0x7fff], (1n << 47n) - 1n],
+    [[0, 0, 0x8000], -(1n << 47n)],
+  ];
+  for (const [words, expected] of cases) assert.equal(signedResult(words), expected);
+});
+
+test('результат отклоняет неверное число слов и значения вне диапазона слова', () => {
+  for (const words of [[], [0], [0, 0, 0, 0]]) assert.throws(() => signedResult(words));
+  for (const words of [[0, -1], [0, 65536], [0, NaN], [0, 1.5]]) {
+    assert.throws(() => signedResult(words));
+  }
 });
