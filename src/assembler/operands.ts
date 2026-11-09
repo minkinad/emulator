@@ -12,6 +12,12 @@ export function register(token: Token): number {
   return value;
 }
 
+function literalBounds(kind: 'immediate' | 'address' | 'shift', isHex: boolean): [bigint, bigint] {
+  const min = kind === 'immediate' && !isHex ? -32768n : 0n;
+  const max = kind === 'immediate' ? (isHex ? 65535n : 32767n) : kind === 'shift' ? 15n : 65535n;
+  return [min, max];
+}
+
 /** BigInt исключает округление большого литерала до проверки диапазона. */
 export function literal(token: Token, kind: 'immediate' | 'address' | 'shift'): number {
   const isHex = /^0x[0-9a-f]+$/i.test(token.text);
@@ -20,8 +26,7 @@ export function literal(token: Token, kind: 'immediate' | 'address' | 'shift'): 
     throw new AssemblyError('INVALID_LITERAL', token, 'Ожидается десятичное число или hex-литерал 0x…; выражения и знаки перед hex не поддерживаются.');
   }
   const value = BigInt(token.text);
-  const min = kind === 'immediate' && !isHex ? -32768n : 0n;
-  const max = kind === 'immediate' ? (isHex ? 65535n : 32767n) : kind === 'shift' ? 15n : 65535n;
+  const [min, max] = literalBounds(kind, isHex);
   if (value < min || value > max) throw new AssemblyError('OUT_OF_RANGE', token, `Значение должно быть в диапазоне ${min}…${max}.`);
   return Number(value < 0 ? value + 65536n : value);
 }

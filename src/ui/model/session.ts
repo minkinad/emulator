@@ -27,6 +27,10 @@ export interface SessionSnapshot {
   readonly runSteps: number;
 }
 
+function changedAddresses(writes: readonly WriteEvent[], kind: WriteEvent['kind']): number[] {
+  return [...new Set(writes.filter(write => write.kind === kind).map(write => write.address))];
+}
+
 /** Оболочка над CPU. Планировщик внедряется, поэтому модель не зависит от DOM. */
 export class EmulatorSession {
   #cpu = new Cpu();
@@ -108,14 +112,7 @@ export class EmulatorSession {
     const tick = () => {
       if (!this.#running || generation !== this.#generation) return;
       this.#cancel = null;
-      const writes: WriteEvent[] = [];
-      let state = this.#cpu.snapshot();
-      for (let i = 0; i < size && this.#runSteps < maxSteps && state.status === 'ready'; i++) {
-        const result = this.#cpu.step();
-        state = result.state;
-        if (result.executed) this.#runSteps += 1;
-        writes.push(...result.writes);
-      }
+      const { state, writes } = this.#runBatch(size, maxSteps);
       if (state.status !== 'ready') {
         this.#running = false;
         this.#publish(this.#executionNotice(state), writes);
@@ -157,6 +154,17 @@ export class EmulatorSession {
   #canExecute(): boolean {
     return this.#assembly !== null && !this.#dirty() && this.#cpu.snapshot().status === 'ready';
   }
+  #runBatch(size: number, maxSteps: number): { state: CpuSnapshot; writes: WriteEvent[] } {
+    const writes: WriteEvent[] = [];
+    let state = this.#cpu.snapshot();
+    for (let i = 0; i < size && this.#runSteps < maxSteps && state.status === 'ready'; i++) {
+      const result = this.#cpu.step();
+      state = result.state;
+      if (result.executed) this.#runSteps += 1;
+      writes.push(...result.writes);
+    }
+    return { state, writes };
+  }
   #stop(): void {
     this.#running = false;
     this.#generation += 1;
@@ -173,8 +181,8 @@ export class EmulatorSession {
       source: this.#source, dataText: this.#dataText, assembly: this.#assembly,
       cpu: this.#cpu.snapshot(), memory: this.#cpu.memory(), running: this.#running,
       dirty: this.#dirty(), notice, runSteps: this.#runSteps,
-      changedRegisters: [...new Set(writes.filter(write => write.kind === 'register').map(write => write.address))],
-      changedData: [...new Set(writes.filter(write => write.kind === 'data').map(write => write.address))],
+      changedRegisters: changedAddresses(writes, 'register'),
+      changedData: changedAddresses(writes, 'data'),
     };
     for (const listener of this.#listeners) listener();
   }

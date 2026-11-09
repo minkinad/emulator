@@ -19,6 +19,17 @@ test('начальные данные: адреса слов, знаковые �
     { address: 256, value: 32768 }, { address: 257, value: 32767 }, { address: 258, value: 65535 }, { address: 4095, value: 0 },
   ]);
 });
+test('ошибка данных сохраняет номер строки, отрицательное слово кодируется в дополнительном коде', () => {
+  assert.deepEqual(parseInitialData('; заголовок\n0x10: -1, +2'), [
+    { address: 16, value: 0xffff }, { address: 17, value: 2 },
+  ]);
+  assert.throws(() => parseInitialData('; заголовок\n0: 1\n1: nope'), error => {
+    assert.ok(error instanceof DataInputError);
+    assert.equal(error.line, 3);
+    assert.match(error.message, /Строка данных 3/);
+    return true;
+  });
+});
 for (const data of ['4096: 0', '4095: 0, 1', '0: 32768', '0: -32769', '0: 0x10000', '0: 1,', '0: 1\n0: 2', '0: 1,2\n1: 3', '-1: 0', '0: 1.5', '0: 9007199254740993']) {
   test(`данные отклоняют неверный ввод: ${data}`, () => assert.throws(() => parseInitialData(data), DataInputError));
 }
